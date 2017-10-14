@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Build zip
-zip build environment.yml saliencyservice/* Dockerfile
+rm -f build.zip
+zip -r build.zip environment.yml saliencyservice Dockerfile .ebextensions
 
 # Deploy to EB
 eb deploy

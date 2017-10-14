@@ -29,6 +29,9 @@ RUN apt-get install -y build-essential
 ADD environment.yml environment.yml
 RUN conda env create -f environment.yml
 ENV PATH /opt/conda/envs/torchbearer-services/bin:$PATH
+
+# Install python-core, IF it's changed on GitHub
+ADD https://api.github.com/repos/torchbearerio/python-core/git/refs/heads/master version.json
 RUN pip install git+https://github.com/torchbearerio/python-core.git --upgrade
 
 ADD saliencyservice app
