@@ -14,7 +14,7 @@ if __name__ == '__main__':
     # handle_task({"epId": 437, "hitId": 123}, "asdf")
     thisTask = Constants.TASK_ARNS['CV_SALIENCY']
 
-    WorkerService.start((thisTask, handle_task))
+    WorkerService.start((thisTask, handle_task, 10))
 
 
 
