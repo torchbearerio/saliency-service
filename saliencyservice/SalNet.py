@@ -2,6 +2,9 @@ import Algorithmia
 from Algorithmia.algo_response import AlgoException
 from pythoncore import Vault, Task, Constants
 from pythoncore.AWS import AWSClient
+from pythoncore.Model.Hit import Hit
+from pythoncore.Model import TorchbearerDB
+import time
 
 # Build Algorithmia client
 key = Vault.get_key('algorithmia-key')
@@ -14,6 +17,10 @@ class SalNet (Task.Task):
         super(SalNet, self).__init__(ep_id, hit_id, task_token)
 
     def __run_salnet(self):
+        session = TorchbearerDB.Session()
+        hit = session.query(Hit).filter_by(hit_id=self.hit_id).one()
+        hit.set_start_time_for_task("cv_saliency")
+
         # Loop through all positions
         bucket = Constants.S3_BUCKETS['STREETVIEW_IMAGES']
         for position in Constants.LANDMARK_POSITIONS.values():
@@ -37,6 +44,10 @@ class SalNet (Task.Task):
                     self.send_failure('SALNET_ERROR', response.error.message)
 
         self.send_success()
+        hit.set_end_time_for_task("cv_saliency")
+        session.commit()
+        session.close()
+
         print("Completed saliency task for ep {}, hit {}".format(self.ep_id, self.hit_id))
 
     def run(self):
