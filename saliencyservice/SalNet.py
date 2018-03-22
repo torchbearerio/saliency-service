@@ -30,7 +30,7 @@ class SalNet (Task.Task):
                 # Pass in file and pass in args required from the algorithm FpGrowth
                 params = {
                     "image": 's3+SVImages://torchbearer-sv-images/{}_{}.jpg'.format(self.ep_id, position),
-                    "saliencyLocation": 's3+S3://torchbearer-saliency-maps/{}_{}.json'.format(self.hit_id, position),
+                    "saliencyLocation": 's3+SVImages://torchbearer-saliency-maps/{}_{}.json'.format(self.hit_id, position),
                 }
 
                 algo = client.algo('deeplearning/SalNet/0.2.0')
