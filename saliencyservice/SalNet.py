@@ -36,12 +36,11 @@ class SalNet (Task.Task):
                 algo = client.algo('deeplearning/SalNet/0.2.0')
 
                 # Run SalNet, then return
-                response = None
                 try:
-                    response = algo.pipe(params)
+                    algo.pipe(params)
 
-                except AlgoException:
-                    self.send_failure('SALNET_ERROR', response.error.message)
+                except AlgoException as error:
+                    self.send_failure('SALNET_ERROR', error.message)
 
         self.send_success()
         hit.set_end_time_for_task("cv_saliency")
