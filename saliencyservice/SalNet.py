@@ -29,7 +29,7 @@ class SalNet (Task.Task):
             if AWSClient.s3_key_exists(bucket, "{}_{}.jpg".format(self.ep_id, position)):
                 # Pass in file and pass in args required from the algorithm FpGrowth
                 params = {
-                    "image": 's3+S3://torchbearer-sv-images/{}_{}.jpg'.format(self.ep_id, position),
+                    "image": 's3+SVImages://torchbearer-sv-images/{}_{}.jpg'.format(self.ep_id, position),
                     "saliencyLocation": 's3+S3://torchbearer-saliency-maps/{}_{}.json'.format(self.hit_id, position),
                 }
 
