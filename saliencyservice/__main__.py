@@ -11,7 +11,7 @@ def handle_task(task_input, task_token):
 
 if __name__ == '__main__':
     print("Welcome to Saliency Service")
-    # handle_task({"epId": 437, "hitId": 123}, "asdf")
+    # handle_task({"epId": 499, "hitId": 952}, "asdf")
     thisTask = Constants.TASK_ARNS['CV_SALIENCY']
 
     WorkerService.start((thisTask, handle_task, 10))

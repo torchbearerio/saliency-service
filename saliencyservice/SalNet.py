@@ -26,10 +26,10 @@ class SalNet (Task.Task):
         for position in Constants.LANDMARK_POSITIONS.values():
             print("Running SalNet for position {} of hit {}".format(position, self.hit_id))
             # See if we have an image for this position; run SalNet if so
-            if AWSClient.s3_key_exists(bucket, "{}_{}.jpg".format(self.ep_id, position)):
+            if AWSClient.s3_key_exists(bucket, "{}_{}.jpg".format(self.hit_id, position)):
                 # Pass in file and pass in args required from the algorithm FpGrowth
                 params = {
-                    "image": 's3+SVImages://torchbearer-sv-images/{}_{}.jpg'.format(self.ep_id, position),
+                    "image": 's3+SVImages://torchbearer-sv-images/{}_{}.jpg'.format(self.hit_id, position),
                     "saliencyLocation": 's3+SVImages://torchbearer-saliency-maps/{}_{}.json'.format(self.hit_id, position),
                 }
 
